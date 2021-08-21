@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <cmath>
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -135,6 +136,8 @@ int main(int argc, char const *argv[])
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+    float time, green;
+
     while (!glfwWindowShouldClose(window))
     {
         // Clear window
@@ -143,6 +146,10 @@ int main(int argc, char const *argv[])
         glUseProgram(shaderProgram);
         // Bind the VAO
         glBindVertexArray(VAO);
+        time = glfwGetTime();
+        green = (sin(time) / 2) + .5;
+        int pos = glGetUniformLocation(shaderProgram, "color");
+        glUniform4f(pos, .5f, green, .5f, 1.0f);
         // Draw the triangle
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
