@@ -34,9 +34,9 @@ char *loadShader(std::string file)
 }
 // Triangle's vertices
 GLfloat vertices[] = {
-    .0f, .5f, .0f,
-    .5f, -.5f, .0f,
-    -.5f, -.5f, .0f};
+    .0f, .5f, .0f, .85f, .5f, .15f,
+    .5f, -.5f, .0f, .13f, .91f, .17f,
+    -.5f, -.5f, .0f, .5f, .3f, .7f};
 
 unsigned int indexes[] = {
     0, 1, 2};
@@ -127,16 +127,16 @@ int main(int argc, char const *argv[])
     // Copy the indexes to GPU
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
     // Set the attributes of the vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
     // Enable the attribute at position 0
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    float time, green;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -146,10 +146,6 @@ int main(int argc, char const *argv[])
         glUseProgram(shaderProgram);
         // Bind the VAO
         glBindVertexArray(VAO);
-        time = glfwGetTime();
-        green = (sin(time) / 2) + .5;
-        int pos = glGetUniformLocation(shaderProgram, "color");
-        glUniform4f(pos, .5f, green, .5f, 1.0f);
         // Draw the triangle
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
