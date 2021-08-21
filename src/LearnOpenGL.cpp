@@ -37,7 +37,7 @@ GLfloat vertices[] = {
     .5f, -.5f, .0f,
     -.5f, -.5f, .0f};
 
-unsigned int indices[] = {
+unsigned int indexes[] = {
     0, 1, 2};
 
 int main(int argc, char const *argv[])
@@ -105,6 +105,7 @@ int main(int argc, char const *argv[])
     glDeleteShader(fragmentShader);
 
     unsigned int EBO;
+    // Generate one buffer
     glGenBuffers(1, &EBO);
 
     /* Hello triangle */
@@ -112,28 +113,37 @@ int main(int argc, char const *argv[])
     // Generate one buffer
     glGenBuffers(1, &VBO);
     unsigned int VAO;
+    // Create a new VertexArrayBuffer
     glGenVertexArrays(1, &VAO);
+    // Bind the VertexArrayBuffer
     glBindVertexArray(VAO);
-    // Bind buffer to GL_ARRAY_BUFFER
+    // Bind GL_ARRAY_BUFFER to VBO
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     // Copy the vertices data to GPU
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
+    // Bind GL_ELEMENT_ARRAY_BUFFER to EBO
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
+    // Copy the indexes to GPU
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
+    // Set the attributes of the vertices
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
+    // Enable the attribute at position 0
     glEnableVertexAttribArray(0);
 
+    // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
     while (!glfwWindowShouldClose(window))
     {
+        // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
+        // Bind the shader program
         glUseProgram(shaderProgram);
+        // Bind the VAO
         glBindVertexArray(VAO);
+        // Draw the triangle
         glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
         glfwPollEvents();
