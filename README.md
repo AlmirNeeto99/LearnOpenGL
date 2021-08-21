@@ -16,3 +16,38 @@ See here: https://learnopengl.com/Introduction
 - [x] Hello Window
 - [x] Hello Triangle
 - [ ] Shaders
+- [ ] Textures
+- [ ] Transformations
+- [ ] Coordinate Systems
+- [ ] Camera
+- [ ] Colors
+- [ ] Lightning
+- [ ] Materials
+- [ ] Lighting maps
+- [ ] Light casters
+- [ ] Multiple lights
+- [ ] Assimp
+- [ ] Mesh
+- [ ] Model
+- [ ] Depth
+- [ ] Stencil
+- [ ] Blending
+- [ ] Face culling
+- [ ] Framebuffers
+- [ ] Cubemaps
+- [ ] Advanced Data
+- [ ] Advanced GLSL
+- [ ] Geometry Shaders
+- [ ] Anti aliasing
+- [ ] Advanced Lightning
+- [ ] Gamma Correction
+- [ ] Shadows
+- [ ] Point Shadows
+- [ ] Normal Mapping
+- [ ] Parallax Mapping
+- [ ] HDR
+- [ ] Bloom
+- [ ] Deferred Shading
+- [ ] SSAO
+- [ ] PBR
+- [ ] Text rendering
