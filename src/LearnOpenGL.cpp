@@ -4,6 +4,7 @@
 #include <fstream>
 #include <cstring>
 #include <cmath>
+#include "headers/Shader.hpp"
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -72,38 +73,16 @@ int main(int argc, char const *argv[])
     // Set the clear color
     glClearColor(.3f, .3f, .3f, 1.f);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
-
-    // Load the content of vertex shader
-    char *vertexShaderSource = loadShader("../src/shaders/vertex.vert");
-
-    unsigned int vertexShader;
-    // Create a vertex shader
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    // Copy the vertex shader source
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    // Compile the shader
-    glCompileShader(vertexShader);
-    // Read the content of fragment shader
-    char *fragmentShaderSource = loadShader("../src/shaders/fragment.frag");
-    unsigned int fragmentShader;
-    // Create a fragment shader
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    // Copy the fragment shader source
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    // Compile the fragment shader
-    glCompileShader(fragmentShader);
-    // Create a shader program
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
-    // Attach the vertex shader to program
-    glAttachShader(shaderProgram, vertexShader);
-    // Attache the fragment shader to program
-    glAttachShader(shaderProgram, fragmentShader);
-    // Link the program
-    glLinkProgram(shaderProgram);
-    // Delete the shaders
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    Shader *shader = NULL;
+    try
+    {
+        shader = new Shader("../src/shaders/vertex.vert", "../src/shaders/fragment.frag");
+    }
+    catch (const std::exception &ex)
+    {
+        std::cerr << ex.what() << std::endl;
+        return -1;
+    }
 
     unsigned int EBO;
     // Generate one buffer
@@ -143,7 +122,7 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
-        glUseProgram(shaderProgram);
+        shader->use();
         // Bind the VAO
         glBindVertexArray(VAO);
         // Draw the triangle
@@ -154,7 +133,6 @@ int main(int argc, char const *argv[])
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
-    glDeleteProgram(shaderProgram);
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
