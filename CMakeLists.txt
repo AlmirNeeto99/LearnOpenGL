@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(LearnOpenGL)
 
-add_executable(Learn "src/LearnOpenGL.cpp")
+file(GLOB SRCS "src/*.cpp")
+
+add_executable(Learn ${SRCS})
 
 add_subdirectory(glad/)
 
