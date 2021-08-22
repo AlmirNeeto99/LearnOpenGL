@@ -123,6 +123,8 @@ int main(int argc, char const *argv[])
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
         shader->use();
+        // Offset the triangle .5 to the right
+        shader->setUniform1f("offset", .5);
         // Bind the VAO
         glBindVertexArray(VAO);
         // Draw the triangle
