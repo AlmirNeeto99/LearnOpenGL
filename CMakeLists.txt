@@ -2,10 +2,23 @@ cmake_minimum_required(VERSION 3.16)
 
 project(LearnOpenGL)
 
-file(GLOB SRCS "src/*.cpp")
-
-add_executable(Learn ${SRCS})
-
+# Glad
 add_subdirectory(glad/)
+# Reusable
+add_subdirectory(src/)
 
-target_link_libraries(Learn glfw3 dl GL X11 pthread glad)
+# HelloWindow
+add_subdirectory(Chapter-HelloWindow/)
+# HelloTriangle
+add_subdirectory(Chapter-HelloTriangle/)
+# Shaders
+add_subdirectory(Chapter-Shaders/)
+
+SET(LINK_FLAGS ${LINK_FLAGS} glfw3 dl GL X11 pthread glad Utils)
+
+
+# \/ Configure Targets \/
+
+target_link_libraries(HelloWindow ${LINK_FLAGS})
+target_link_libraries(HelloTriangle ${LINK_FLAGS})
+target_link_libraries(Shaders ${LINK_FLAGS})
