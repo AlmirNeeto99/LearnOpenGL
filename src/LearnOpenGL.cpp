@@ -10,29 +10,6 @@ void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
-
-char *loadShader(std::string file)
-{
-    std::ifstream shader;
-    shader.open(file);   // Open the file
-    std::string line;    // Current line string
-    std::string content; // Final content
-    // While there's text in file
-    while (!shader.eof())
-    {
-        // Read one line of the file
-        std::getline(shader, line);
-        // Add the current line to the final content
-        content += line + "\n";
-    }
-    // Closes the file
-    shader.close();
-    // Create a result string that will be returned
-    char *result = new char[content.length() - 1];
-    // Copy the content of one string to another, this is necessary because the value were being lost
-    std::strcpy(result, content.c_str());
-    return result;
-}
 // Triangle's vertices
 GLfloat vertices[] = {
     .0f, .5f, .0f, .85f, .5f, .15f,
