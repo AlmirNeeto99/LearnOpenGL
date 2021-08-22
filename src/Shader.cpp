@@ -92,3 +92,8 @@ Shader::~Shader()
 {
     glDeleteShader(this->id);
 }
+
+int Shader::getId()
+{
+    return this->id;
+}
