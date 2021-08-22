@@ -92,3 +92,8 @@ Shader::~Shader()
 {
     glDeleteShader(this->id);
 }
+
+void Shader::setUniform1f(char *name, float value)
+{
+    glUniform1f(glGetUniformLocation(this->id, name), value);
+}
