@@ -55,7 +55,7 @@ char *Shader::loadShader(std::string path)
     }
     catch (std::ifstream::failure e)
     {
-        throw "SHADER::ERROR::LOADING";
+        throw std::runtime_error("SHADER::ERROR::LOADING");
     }
 }
 
