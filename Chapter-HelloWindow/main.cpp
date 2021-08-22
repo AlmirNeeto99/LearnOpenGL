@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Hello Window", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;

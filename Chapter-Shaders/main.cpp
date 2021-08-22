@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "Learn OpenGL", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Shaders", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -83,10 +83,10 @@ int main(int argc, char const *argv[])
     // Copy the indexes to GPU
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
     // Set the attributes of the vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
     // Enable the attribute at position 0
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void *)(3 * sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
     // Unbind the buffers
