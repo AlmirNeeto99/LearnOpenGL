@@ -51,3 +51,9 @@ See here: https://learnopengl.com/Introduction
 - [ ] SSAO
 - [ ] PBR
 - [ ] Text rendering
+
+---
+
+# Exercises
+
+Every LearnOpenGL's sections come with some exercises. Each exercise will be done within a new branch prefixed with `exercise/`.
