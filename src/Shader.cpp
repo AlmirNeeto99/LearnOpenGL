@@ -51,6 +51,7 @@ char *Shader::loadShader(std::string path)
         char *code = new char[content.length() - 1];
         const char *c = content.c_str();
         std::strcpy(code, c);
+        shader.close();
         return code;
     }
     catch (std::ifstream::failure e)
