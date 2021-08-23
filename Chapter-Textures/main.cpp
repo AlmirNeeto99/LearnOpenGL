@@ -14,12 +14,15 @@ void framebuffer_resize(GLFWwindow *window, int width, int height)
 }
 // Triangle's vertices
 GLfloat vertices[] = {
-    .0f, .5f, .0f, .85f, .5f, .15f,
-    .5f, -.5f, .0f, .13f, .91f, .17f,
-    -.5f, -.5f, .0f, .5f, .3f, .7f};
+    -.5f, .5f, .0f, .3f, .5f, .1f, .0f, 1.f,     // Top left
+    .5f, .5f, .0f, .6f, .6f, .9f, 1.f, 1.f,      // Top right
+    .5f, -.5f, .0f, .9f, .75f, .15f, 1.f, .0f,   // Bottom right
+    -.5f, -.5f, .0f, .15f, .3f, .84f, .0f, .0f}; // Bottom left
 
 unsigned int indexes[] = {
-    0, 1, 2};
+    0, 1, 3, // First triangle
+    1, 2, 3  // Second triangle
+};
 
 int main(int argc, char const *argv[])
 {
@@ -55,7 +58,7 @@ int main(int argc, char const *argv[])
     Shader *shader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
+        shader = new Shader("../resources/shaders/textures/vertex.vert", "../resources/shaders/textures/fragment.frag");
     }
     catch (const std::exception &ex)
     {
@@ -63,17 +66,18 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
+    unsigned int VAO;
+    // Create a new VertexArrayBuffer
+    glGenVertexArrays(1, &VAO);
+
+    unsigned int VBO;
+    // Generate one buffer
+    glGenBuffers(1, &VBO);
+
     unsigned int EBO;
     // Generate one buffer
     glGenBuffers(1, &EBO);
 
-    /* Hello triangle */
-    unsigned int VBO;
-    // Generate one buffer
-    glGenBuffers(1, &VBO);
-    unsigned int VAO;
-    // Create a new VertexArrayBuffer
-    glGenVertexArrays(1, &VAO);
     // Bind the VertexArrayBuffer
     glBindVertexArray(VAO);
     // Bind GL_ARRAY_BUFFER to VBO
@@ -85,11 +89,34 @@ int main(int argc, char const *argv[])
     // Copy the indexes to GPU
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
     // Set the attributes of the vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)0);
     // Enable the attribute at position 0
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
+    // Set vertex color attributes
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
+    // Enable the attribute at position 1
     glEnableVertexAttribArray(1);
+    // Set texture coordinates attributes
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(6 * sizeof(GLfloat)));
+    // Enable the attribute at position 2
+    glEnableVertexAttribArray(2);
+
+    int width, height, nrChannels;
+    unsigned char *wall = stbi_load("../resources/textures/wall.jpg", &width, &height, &nrChannels, 0);
+
+    unsigned int texture;
+    glGenTextures(1, &texture);
+
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, wall);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+    stbi_image_free(wall);
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -101,17 +128,20 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
+        glBindTexture(GL_TEXTURE_2D, texture);
         shader->use();
         // Bind the VAO
         glBindVertexArray(VAO);
         // Draw the triangle
-        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
+    //glDeleteTextures(1, &texture);
+    delete shader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
