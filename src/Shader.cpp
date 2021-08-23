@@ -90,7 +90,7 @@ void Shader::use()
 
 Shader::~Shader()
 {
-    glDeleteShader(this->id);
+    glDeleteProgram(this->id);
 }
 
 int Shader::getId()
