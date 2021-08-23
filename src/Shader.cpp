@@ -98,3 +98,7 @@ int Shader::getId()
 {
     return this->id;
 }
+void Shader::setUniform1i(char *name, int value)
+{
+    glUniform1i(glGetUniformLocation(this->id, name), value);
+}

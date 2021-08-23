@@ -11,6 +11,7 @@ public:
     ~Shader();
     int getId();
     void use();
+    void setUniform1i(char *name, int value);
 
 private:
     unsigned int id;
