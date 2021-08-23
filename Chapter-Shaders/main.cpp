@@ -12,9 +12,9 @@ void framebuffer_resize(GLFWwindow *window, int width, int height)
 }
 // Triangle's vertices
 GLfloat vertices[] = {
-    .0f, .5f, .0f, .85f, .5f, .15f,
-    .5f, -.5f, .0f, .13f, .91f, .17f,
-    -.5f, -.5f, .0f, .5f, .3f, .7f};
+    .0f, .5f, .0f,
+    .5f, -.5f, .0f,
+    -.5f, -.5f, .0f};
 
 unsigned int indexes[] = {
     0, 1, 2};
@@ -83,11 +83,9 @@ int main(int argc, char const *argv[])
     // Copy the indexes to GPU
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
     // Set the attributes of the vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     // Enable the attribute at position 0
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(1);
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
