@@ -46,7 +46,7 @@ int main(int argc, char const *argv[])
     glClearColor(.3f, .3f, .3f, 1.f);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
 
-    Shader *shader = new Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
+    Shader *shader = new Shader("../resources/shaders/shaders/vertex.vert", "../resources/shaders/shaders/fragment.frag");
 
     // Create a Vertex Buffer
     unsigned int VBO;
@@ -79,6 +79,7 @@ int main(int argc, char const *argv[])
     }
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    delete shader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
