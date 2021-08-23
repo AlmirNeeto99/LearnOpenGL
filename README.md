@@ -7,8 +7,14 @@ See here: https://learnopengl.com/Introduction
 
 # Building
 
-- Create a folder called at project's root
-- Run `cmake ../ && make && ./run`
+This project uses separated build files for each Chapter.
+
+- Create a directory called `build`
+- Inside it, run: `cmake ../` and `make`
+
+Each executable will be build inside its folder.
+
+So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, you only need to run: `./Chapter-HelloTriangle/HelloTriangle`. You can also navigate to `Chapter-HelloTriangle` and run: `./HelloTriangle`
 
 # Path
 
