@@ -15,6 +15,8 @@ add_subdirectory(Chapter-HelloTriangle/)
 add_subdirectory(Chapter-Shaders/)
 # Textures
 add_subdirectory(Chapter-Textures/)
+# Two Textures
+add_subdirectory(Chapter-TwoTextures/)
 
 SET(LINK_FLAGS ${LINK_FLAGS} glfw3 dl GL X11 pthread glad Utils)
 
@@ -25,3 +27,4 @@ target_link_libraries(HelloWindow ${LINK_FLAGS})
 target_link_libraries(HelloTriangle ${LINK_FLAGS})
 target_link_libraries(Shaders ${LINK_FLAGS})
 target_link_libraries(Textures ${LINK_FLAGS})
+target_link_libraries(TwoTextures ${LINK_FLAGS})
