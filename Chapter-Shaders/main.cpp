@@ -53,7 +53,7 @@ int main(int argc, char const *argv[])
     Shader *shader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/vertex.vert", "../resources/shaders/fragment.frag");
+        shader = new Shader("../resources/shaders/shaders/vertex.vert", "../resources/shaders/shaders/fragment.frag");
     }
     catch (const std::exception &ex)
     {
@@ -107,9 +107,12 @@ int main(int argc, char const *argv[])
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+    // Deleting buffers
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
     glDeleteBuffers(1, &EBO);
+    // Deleting shader
+    delete shader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
