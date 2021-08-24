@@ -21,8 +21,8 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Creating Window
 - [x] Hello Window
 - [x] Hello Triangle
-- [ ] Shaders
-- [ ] Textures
+- [x] Shaders
+- [x] Textures
 - [ ] Transformations
 - [ ] Coordinate Systems
 - [ ] Camera
