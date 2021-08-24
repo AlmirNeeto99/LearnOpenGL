@@ -24,6 +24,27 @@ unsigned int indexes[] = {
     1, 2, 3  // Second triangle
 };
 
+GLfloat opacity = .5f;
+
+void key_handler(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    switch (key)
+    {
+    case GLFW_KEY_UP:
+        // Increase Opacity
+        opacity += .01f;
+        if (opacity > 1.f)
+            opacity = 1.f;
+        break;
+    case GLFW_KEY_DOWN:
+        // Decrease Opacity
+        opacity -= .01f;
+        if (opacity < .0f)
+            opacity = .0f;
+        break;
+    }
+}
+
 int main(int argc, char const *argv[])
 {
     if (glfwInit() != GLFW_TRUE)
@@ -54,6 +75,8 @@ int main(int argc, char const *argv[])
     glViewport(0, 0, 800, 600);
     // Set the clear color
     glClearColor(.3f, .3f, .3f, 1.f);
+    // Key event callback
+    glfwSetKeyCallback(window, key_handler);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
     Shader *shader = NULL;
     try
@@ -153,6 +176,8 @@ int main(int argc, char const *argv[])
         shader->use();
         shader->setUniform1i("texture1", 0);
         shader->setUniform1i("texture2", 1);
+        // Set opacity value
+        shader->setUniform1f("opacity", opacity);
         // Bind the VAO
         glBindVertexArray(VAO);
         // Draw the triangle
