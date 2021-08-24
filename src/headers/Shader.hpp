@@ -12,6 +12,7 @@ public:
     int getId();
     void use();
     void setUniform1i(char *name, int value);
+    void setUniform1f(char *name, float value);
 
 private:
     unsigned int id;

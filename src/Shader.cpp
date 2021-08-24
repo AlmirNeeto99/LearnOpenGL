@@ -102,3 +102,8 @@ void Shader::setUniform1i(char *name, int value)
 {
     glUniform1i(glGetUniformLocation(this->id, name), value);
 }
+
+void Shader::setUniform1f(char *name, float value)
+{
+    glUniform1f(glGetUniformLocation(this->getId(), name), value);
+}
