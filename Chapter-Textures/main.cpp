@@ -100,7 +100,12 @@ int main(int argc, char const *argv[])
     // Enable the attribute at position 2
     glEnableVertexAttribArray(2);
 
-    Texture texture("../resources/textures/wall.jpg");
+    Texture texture("../resources/textures/wall.jpg", GL_TEXTURE0);
+    texture.activateUnit();
+    texture.bind();
+    texture.configure();
+    texture.unbind();
+    texture.deactivateUnit();
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
