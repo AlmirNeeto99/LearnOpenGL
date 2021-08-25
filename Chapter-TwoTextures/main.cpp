@@ -5,7 +5,7 @@
 #include <cstring>
 #include <cmath>
 #include "../src/headers/Shader.hpp"
-#define STB_IMAGE_IMPLEMENTATION
+#include "../src/headers/Texture.hpp"
 #include "stb_image.h"
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
@@ -101,40 +101,53 @@ int main(int argc, char const *argv[])
     // Enable the attribute at position 2
     glEnableVertexAttribArray(2);
     // Variables to keep imagem information
-    int width, height, nrChannels;
-    // Load wall texture
-    unsigned char *wall = stbi_load("../resources/textures/wall.jpg", &width, &height, &nrChannels, 0);
+    // int width, height, nrChannels;
+    // // Load wall texture
+    // unsigned char *wall = stbi_load("../resources/textures/wall.jpg", &width, &height, &nrChannels, 0);
 
-    unsigned int texture1, texture2;
-    glGenTextures(1, &texture1);
-    glGenTextures(1, &texture2);
-    // Set TEXTURE_0 current active texture
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, wall);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    // Unbind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
-    stbi_image_free(wall);
-    // Flip image
+    // unsigned int texture1, texture2;
+    // glGenTextures(1, &texture1);
+    // glGenTextures(1, &texture2);
+    // // Set TEXTURE_0 current active texture
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, texture1);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, wall);
+    // glGenerateMipmap(GL_TEXTURE_2D);
+    // // Unbind texture
+    // glBindTexture(GL_TEXTURE_2D, 0);
+    // stbi_image_free(wall);
+    // // Flip image
+    // stbi_set_flip_vertically_on_load(true);
+    // // Load awesome face texture
+    // unsigned char *face = stbi_load("../resources/textures/awesomeface.png", &width, &height, &nrChannels, 0);
+    // // Set TEXTURE_1 current active texture
+    // glActiveTexture(GL_TEXTURE1);
+    // glBindTexture(GL_TEXTURE_2D, texture2);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, face);
+    // glGenerateMipmap(GL_TEXTURE_2D);
+    // // Unbind texture
+    // glBindTexture(GL_TEXTURE_2D, 0);
+
+    Texture wall("../resources/textures/wall.jpg", GL_TEXTURE0);
+    wall.activateUnit();
+    wall.bind();
+    wall.configure();
+    wall.unbind();
     stbi_set_flip_vertically_on_load(true);
-    // Load awesome face texture
-    unsigned char *face = stbi_load("../resources/textures/awesomeface.png", &width, &height, &nrChannels, 0);
-    // Set TEXTURE_1 current active texture
-    glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, face);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    // Unbind texture
-    glBindTexture(GL_TEXTURE_2D, 0);
+    Texture face("../resources/textures/awesomeface.png", GL_TEXTURE1);
+    face.setType(GL_RGBA);
+    face.activateUnit();
+    face.bind();
+    face.configure();
+    face.unbind();
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -146,10 +159,10 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
+        wall.activateUnit();
+        wall.bind();
+        face.activateUnit();
+        face.bind();
         shader->use();
         shader->setUniform1i("texture1", 0);
         shader->setUniform1i("texture2", 1);
