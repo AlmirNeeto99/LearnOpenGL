@@ -102,11 +102,11 @@ int main(int argc, char const *argv[])
     glEnableVertexAttribArray(2);
     // Variables to keep imagem information
 
-    Texture wall("../resources/textures/wall.jpg", GL_TEXTURE0);
-    wall.activateUnit();
-    wall.bind();
-    wall.configure();
-    wall.unbind();
+    Texture wooden("../resources/textures/wooden.jpg", GL_TEXTURE0);
+    wooden.activateUnit();
+    wooden.bind();
+    wooden.configure();
+    wooden.unbind();
     stbi_set_flip_vertically_on_load(true);
     Texture face("../resources/textures/awesomeface.png", GL_TEXTURE1);
     face.setType(GL_RGBA);
@@ -125,8 +125,8 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
-        wall.activateUnit();
-        wall.bind();
+        wooden.activateUnit();
+        wooden.bind();
         face.activateUnit();
         face.bind();
         shader->use();
