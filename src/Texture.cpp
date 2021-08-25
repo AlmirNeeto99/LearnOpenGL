@@ -2,11 +2,12 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Texture::Texture(std::string path)
+Texture::Texture(std::string path, int unit)
 {
     this->data = this->loadImage(path);
-    this->unit = GL_TEXTURE0;
+    this->unit = unit;
     glGenTextures(1, &this->id);
+    glActiveTexture(this->unit);
     glBindTexture(GL_TEXTURE_2D, this->id);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -53,6 +54,7 @@ int Texture::getUnit()
     return this->unit;
 }
 
-Texture::~Texture(){
+Texture::~Texture()
+{
     stbi_image_free(this->data);
 }

@@ -13,7 +13,7 @@ private:
     unsigned char *loadImage(std::string path);
 
 public:
-    Texture(std::string path);
+    Texture(std::string path, int unit);
     ~Texture();
     // Binders
     void bind();
