@@ -4,8 +4,15 @@ This project is a keeper of LearnOpenGL course.
 
 See here: https://learnopengl.com/Introduction
 
+# Dependencies
+
+- GLFW
+- GLAD
+- OpenGL
 
 # Building
+
+For building this project you will need Cmake.
 
 This project uses separated build files for each Chapter.
 
@@ -15,6 +22,8 @@ This project uses separated build files for each Chapter.
 Each executable will be build inside its folder.
 
 So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, you only need to run: `./Chapter-HelloTriangle/HelloTriangle`. You can also navigate to `Chapter-HelloTriangle` and run: `./HelloTriangle`
+
+**This project was tested only on Ubuntu.**
 
 # Path
 
