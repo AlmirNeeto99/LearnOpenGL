@@ -5,8 +5,7 @@
 #include <cstring>
 #include <cmath>
 #include "../src/headers/Shader.hpp"
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../src/headers/Texture.hpp"
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -101,22 +100,7 @@ int main(int argc, char const *argv[])
     // Enable the attribute at position 2
     glEnableVertexAttribArray(2);
 
-    int width, height, nrChannels;
-    unsigned char *wall = stbi_load("../resources/textures/wall.jpg", &width, &height, &nrChannels, 0);
-
-    unsigned int texture;
-    glGenTextures(1, &texture);
-
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, wall);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    glBindTexture(GL_TEXTURE_2D, 0);
-    stbi_image_free(wall);
+    Texture texture("../resources/textures/wall.jpg");
 
     // Unbind the buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -128,7 +112,7 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT);
         // Bind the shader program
-        glBindTexture(GL_TEXTURE_2D, texture);
+        texture.bind();
         shader->use();
         // Bind the VAO
         glBindVertexArray(VAO);
