@@ -9,8 +9,9 @@ class Texture
 private:
     unsigned int id;
     unsigned char *data;
-    int width, height, nrChannels, unit;
+    int width, height, nrChannels, unit = GL_TEXTURE0;
     unsigned char *loadImage(std::string path);
+    int type = GL_RGB;
 
 public:
     Texture(std::string path, int unit);
@@ -18,12 +19,16 @@ public:
     // Binders
     void bind();
     void unbind();
-    void useUnit();
+    void activateUnit();
+    void deactivateUnit();
     // Getters
     int getId();
     int getUnit();
     // Setters
     void setUnit(int);
+    void setType(int);
+    // Methods
+    void configure();
 };
 
 #endif
