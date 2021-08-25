@@ -7,16 +7,16 @@ Texture::Texture(std::string path, int unit)
     this->data = this->loadImage(path);
     this->unit = unit;
     glGenTextures(1, &this->id);
-    glActiveTexture(this->unit);
-    glBindTexture(GL_TEXTURE_2D, this->id);
+}
 
+void Texture::configure()
+{
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->width, this->height, 0, GL_RGB, GL_UNSIGNED_BYTE, this->data);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->width, this->height, 0, this->type, GL_UNSIGNED_BYTE, this->data);
     glGenerateMipmap(GL_TEXTURE_2D);
-    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 unsigned char *Texture::loadImage(std::string path)
@@ -34,9 +34,14 @@ void Texture::bind()
     glBindTexture(GL_TEXTURE_2D, this->id);
 }
 
-void Texture::useUnit()
+void Texture::activateUnit()
 {
     glActiveTexture(this->unit);
+}
+
+void Texture::deactivateUnit()
+{
+    glActiveTexture(0);
 }
 
 void Texture::setUnit(int unit)
@@ -57,4 +62,9 @@ int Texture::getUnit()
 Texture::~Texture()
 {
     stbi_image_free(this->data);
+}
+
+void Texture::setType(int type)
+{
+    this->type = type;
 }
