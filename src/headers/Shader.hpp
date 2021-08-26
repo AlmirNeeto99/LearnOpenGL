@@ -3,6 +3,8 @@
 
 #include <string>
 #include "glad/glad.h"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 class Shader
 {
@@ -12,6 +14,7 @@ public:
     int getId();
     void use();
     void setUniform1i(char *name, int value);
+    void setUniformMat4(char *name, glm::mat4 mtx);
 
 private:
     unsigned int id;
