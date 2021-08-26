@@ -122,12 +122,7 @@ int main(int argc, char const *argv[])
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-    glm::mat4 trans(1.0f);
-    trans = glm::rotate(trans, glm::radians(45.0f), glm::vec3(0, 0, 1));
-    trans = glm::translate(trans, glm::vec3(.25, 0, 0));
-    shader->use();
-    shader->setUniformMat4("trans", trans);
+    glm::mat4 trans;
 
     while (!glfwWindowShouldClose(window))
     {
@@ -143,9 +138,20 @@ int main(int argc, char const *argv[])
         shader->setUniform1i("texture2", 1);
         // Bind the VAO
         glBindVertexArray(VAO);
-        // Draw the triangle
+        // Draw the top-right object
+        trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(.5, .5, 0));
+        trans = glm::rotate(trans, glm::radians((float)glfwGetTime() * 100), glm::vec3(0, 0, 1));
+        shader->setUniformMat4("trans", trans);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        // Swap Buffer and handle events
+        // Draw the bottom-left object
+        trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(-.5, -.5, 0));
+        float prop = abs(sin(glfwGetTime()));
+        trans = glm::scale(trans, glm::vec3(prop, prop, 1));
+        shader->setUniformMat4("trans", trans);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // Swap buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
