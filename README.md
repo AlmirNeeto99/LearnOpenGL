@@ -33,7 +33,7 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Shaders
 - [x] Textures
 - [x] Transformations
-- [ ] Coordinate Systems
+- [x] Coordinate Systems
 - [ ] Camera
 - [ ] Colors
 - [ ] Lightning
