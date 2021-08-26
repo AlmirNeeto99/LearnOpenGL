@@ -127,7 +127,7 @@ int main(int argc, char const *argv[])
     trans = glm::rotate(trans, glm::radians(45.0f), glm::vec3(0, 0, 1));
     trans = glm::translate(trans, glm::vec3(.25, 0, 0));
     shader->use();
-    glUniformMatrix4fv(glGetUniformLocation(shader->getId(), "trans"), 1, GL_FALSE, glm::value_ptr(trans));
+    shader->setUniformMat4("trans", trans);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -145,6 +145,7 @@ int main(int argc, char const *argv[])
         glBindVertexArray(VAO);
         // Draw the triangle
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
