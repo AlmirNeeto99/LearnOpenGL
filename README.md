@@ -1,74 +1,7 @@
-# Learn OpenGL
+# Exercise
 
-This project is a keeper of LearnOpenGL course.
+- Name: Translation first than rotating.
 
-See here: https://learnopengl.com/Introduction
+- Description: Using the last transformation on the container, try switching the order around by first rotating and then translating. See what happens and try to reason why this happens.
 
-# Dependencies
-
-- GLFW
-- GLAD
-- OpenGL
-
-# Building
-
-For building this project you will need Cmake.
-
-This project uses separated build files for each Chapter.
-
-- Create a directory called `build`
-- Inside it, run: `cmake ../` and `make`
-
-Each executable will be build inside its folder.
-
-So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, you only need to run: `./Chapter-HelloTriangle/HelloTriangle`. You can also navigate to `Chapter-HelloTriangle` and run: `./HelloTriangle`
-
-**This project was tested only on Ubuntu.**
-
-# Path
-
-- [x] Creating Window
-- [x] Hello Window
-- [x] Hello Triangle
-- [x] Shaders
-- [x] Textures
-- [ ] Transformations
-- [ ] Coordinate Systems
-- [ ] Camera
-- [ ] Colors
-- [ ] Lightning
-- [ ] Materials
-- [ ] Lighting maps
-- [ ] Light casters
-- [ ] Multiple lights
-- [ ] Assimp
-- [ ] Mesh
-- [ ] Model
-- [ ] Depth
-- [ ] Stencil
-- [ ] Blending
-- [ ] Face culling
-- [ ] Framebuffers
-- [ ] Cubemaps
-- [ ] Advanced Data
-- [ ] Advanced GLSL
-- [ ] Geometry Shaders
-- [ ] Anti aliasing
-- [ ] Advanced Lightning
-- [ ] Gamma Correction
-- [ ] Shadows
-- [ ] Point Shadows
-- [ ] Normal Mapping
-- [ ] Parallax Mapping
-- [ ] HDR
-- [ ] Bloom
-- [ ] Deferred Shading
-- [ ] SSAO
-- [ ] PBR
-- [ ] Text rendering
-
----
-
-# Exercises
-
-Every LearnOpenGL's sections come with some exercises. Each exercise will be done within a new branch prefixed with `exercise/`.
+- Answer: By translating first, than rotating, the rotation will reference the world origin. So the box will orbit the world origin.
