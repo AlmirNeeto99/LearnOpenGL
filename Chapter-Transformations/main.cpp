@@ -7,6 +7,9 @@
 #include "../src/headers/Shader.hpp"
 #include "../src/headers/Texture.hpp"
 #include "stb_image.h"
+#include "glm/glm.hpp"
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -58,7 +61,7 @@ int main(int argc, char const *argv[])
     Shader *shader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/textures/vertex.vert", "../resources/shaders/two-textures/fragment.frag");
+        shader = new Shader("../resources/shaders/transformations/vertex.vert", "../resources/shaders/two-textures/fragment.frag");
     }
     catch (const std::exception &ex)
     {
@@ -119,6 +122,12 @@ int main(int argc, char const *argv[])
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    glm::mat4 trans(1.0f);
+    trans = glm::rotate(trans, glm::radians(45.0f), glm::vec3(0, 0, 1));
+    trans = glm::translate(trans, glm::vec3(.25, 0, 0));
+    shader->use();
+    glUniformMatrix4fv(glGetUniformLocation(shader->getId(), "trans"), 1, GL_FALSE, glm::value_ptr(trans));
 
     while (!glfwWindowShouldClose(window))
     {
