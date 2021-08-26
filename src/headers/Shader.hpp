@@ -13,8 +13,8 @@ public:
     ~Shader();
     int getId();
     void use();
-    void setUniform1i(char *name, int value);
-    void setUniformMat4(char *name, glm::mat4 mtx);
+    void setUniform1i(std::string, int value);
+    void setUniformMat4(std::string, glm::mat4 mtx);
 
 private:
     unsigned int id;
