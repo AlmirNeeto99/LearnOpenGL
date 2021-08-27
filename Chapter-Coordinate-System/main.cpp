@@ -197,6 +197,9 @@ int main(int argc, char const *argv[])
         shader->use();
         // Bind the VAO
         glBindVertexArray(VAO);
+        view = glm::mat4(1.0);
+        view = glm::translate(view, glm::vec3(0, 0, -10));
+        view = glm::rotate(view, glm::radians((float)glfwGetTime() * 40), glm::vec3(0, 1, 0));
         for (int i = 0; i < sizeof(cubePositions); i++)
         {
             model = glm::mat4(1.f);
