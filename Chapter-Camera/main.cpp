@@ -117,7 +117,7 @@ int main(int argc, char const *argv[])
     // Set the Open GL viewport
     glViewport(0, 0, 800, 600);
     // Set the clear color
-    glClearColor(.3f, .3f, .3f, 1.f);
+    glClearColor(.0f, .0f, .0f, 1.f);
     // Enabling depth test so faces won't overlap
     glEnable(GL_DEPTH_TEST);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
