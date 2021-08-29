@@ -23,6 +23,8 @@ add_subdirectory(Chapter-Transformations/)
 add_subdirectory(Chapter-Coordinate-System/)
 # Camera
 add_subdirectory(Chapter-Camera/)
+# Lightning
+add_subdirectory(Chapter-Lightning/)
 
 SET(LINK_FLAGS ${LINK_FLAGS} glfw3 dl GL X11 pthread glad Utils)
 
@@ -37,3 +39,4 @@ target_link_libraries(TwoTextures ${LINK_FLAGS})
 target_link_libraries(Transformations ${LINK_FLAGS})
 target_link_libraries(Coordinates ${LINK_FLAGS})
 target_link_libraries(Camera ${LINK_FLAGS})
+target_link_libraries(Lightning ${LINK_FLAGS})
