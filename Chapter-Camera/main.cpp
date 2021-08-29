@@ -6,10 +6,28 @@
 #include <cmath>
 #include "../src/headers/Shader.hpp"
 #include "../src/headers/Texture.hpp"
+#include "../src/headers/Camera.hpp"
 #include "stb_image.h"
 #include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+glm::vec3 position = glm::vec3(0, 0, 3);
+glm::vec3 direction = glm::vec3(0, 0, -1);
+glm::vec3 up = glm::vec3(0, 1, 0);
+float last, delta, current;
+glm::mat4 view = glm::mat4(1.0);
+
+float pitch = 0, yaw = 0;
+double xPos, yPos, prevX = 300, prevY = 400;
+
+void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -84,7 +102,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Coordinates", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Camera", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -103,6 +121,7 @@ int main(int argc, char const *argv[])
     // Enabling depth test so faces won't overlap
     glEnable(GL_DEPTH_TEST);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
+    glfwSetKeyCallback(window, handle_key);
     Shader *shader = NULL;
     try
     {
@@ -168,9 +187,7 @@ int main(int argc, char const *argv[])
     glBindVertexArray(0);
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-    glm::mat4 view = glm::mat4(1.0), model = glm::mat4(1.0), projection = glm::mat4(1.0);
-
-    view = glm::translate(view, glm::vec3(0, 0, -10));
+    glm::mat4 model = glm::mat4(1.0), projection = glm::mat4(1.0);
     projection = glm::perspective(glm::radians(45.0f), 800.f / 600.f, .1f, 1000.f);
 
     glm::vec3 cubePositions[] = {
@@ -184,9 +201,14 @@ int main(int argc, char const *argv[])
         glm::vec3(1.5f, 2.0f, -2.5f),
         glm::vec3(1.5f, 0.2f, -1.5f),
         glm::vec3(-1.3f, 1.0f, -1.5f)};
-
+    last = glfwGetTime();
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    Camera c(vec3(0, 0, 3), vec3(0, 0, -1));
     while (!glfwWindowShouldClose(window))
     {
+        current = glfwGetTime();
+        delta = current - last;
+        last = current;
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Bind the shader program
@@ -213,6 +235,7 @@ int main(int argc, char const *argv[])
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
+        view = c.update(window);
     }
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
