@@ -80,9 +80,12 @@ mat4x4 Camera::update(GLFWwindow *window)
     this->lastX = this->xPos;
     this->lastY = this->yPos;
     this->pitch += offsetY * this->speed * .5;
+    if (this->pitch > 89.9f)
+        this->pitch = 89.9f;
+    if (this->pitch < -89.9f)
+        this->pitch = -89.9f;
     this->yaw += offsetX * this->speed * .5;
-
-    this->direction.x = cos(radians(this->yaw));
+    this->direction.x = cos(radians(this->yaw)) * cos(radians(this->pitch));
     this->direction.y = sin(radians(this->pitch));
     this->direction.z = cos(radians(this->pitch)) * sin(radians(this->yaw));
 
