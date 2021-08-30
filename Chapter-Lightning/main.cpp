@@ -18,9 +18,6 @@ glm::vec3 up = glm::vec3(0, 1, 0);
 float last, delta, current;
 glm::mat4 view = glm::mat4(1.0);
 
-float pitch = 0, yaw = 0;
-double xPos, yPos, prevX = 300, prevY = 400;
-
 void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
     if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
@@ -33,60 +30,52 @@ void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
-/* Cube's vertices
-Thanks to LearnOpenGL 
 
-Unfortunately, mapping the textures coordinates would be a hard work to do.
-Since it's not purpose right now, i copied the cube coordinates already mapped.
+GLfloat simpleCube[] = {
+    -0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f, -0.5f,
+    0.5f, 0.5f, -0.5f,
+    0.5f, 0.5f, -0.5f,
+    -0.5f, 0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
 
-*/
-GLfloat vertices[] = {
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f,
+    0.5f, -0.5f, 0.5f,
+    0.5f, 0.5f, 0.5f,
+    0.5f, 0.5f, 0.5f,
+    -0.5f, 0.5f, 0.5f,
+    -0.5f, -0.5f, 0.5f,
 
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f,
+    -0.5f, 0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f, -0.5f,
+    -0.5f, -0.5f, 0.5f,
+    -0.5f, 0.5f, 0.5f,
 
-    -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f,
+    0.5f, 0.5f, -0.5f,
+    0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f, 0.5f,
+    0.5f, 0.5f, 0.5f,
 
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f, -0.5f,
+    0.5f, -0.5f, 0.5f,
+    0.5f, -0.5f, 0.5f,
+    -0.5f, -0.5f, 0.5f,
+    -0.5f, -0.5f, -0.5f,
 
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f,
+    0.5f, 0.5f, -0.5f,
+    0.5f, 0.5f, 0.5f,
+    0.5f, 0.5f, 0.5f,
+    -0.5f, 0.5f, 0.5f,
+    -0.5f, 0.5f, -0.5f};
 
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f};
-
-unsigned int indexes[] = {
-    // Front face
-    0, 1, 3,
-    1, 2, 3};
+GLfloat pointLight[] = {
+    .3f, -.7f, .1f, 1.f, 1.f, 1.f};
 
 int main(int argc, char const *argv[])
 {
@@ -102,7 +91,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Camera", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Lightning", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -123,9 +112,11 @@ int main(int argc, char const *argv[])
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
     glfwSetKeyCallback(window, handle_key);
     Shader *shader = NULL;
+    Shader *lightShader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/coordinate-system/vertex.vert", "../resources/shaders/coordinate-system/fragment.frag");
+        shader = new Shader("../resources/shaders/lightning/vertex.vert", "../resources/shaders/lightning/fragment.frag");
+        lightShader = new Shader("../resources/shaders/lightning/vertex.vert", "../resources/shaders/lightning/lamp.frag");
     }
     catch (const std::exception &ex)
     {
@@ -133,74 +124,30 @@ int main(int argc, char const *argv[])
         return -1;
     }
 
-    unsigned int VAO;
-    // Create a new VertexArrayBuffer
-    glGenVertexArrays(1, &VAO);
+    unsigned int simpleCubeVAO, simpleCubeVBO;
+    glGenBuffers(1, &simpleCubeVBO);
+    glGenVertexArrays(1, &simpleCubeVAO);
 
-    unsigned int VBO;
-    // Generate one buffer
-    glGenBuffers(1, &VBO);
+    glBindVertexArray(simpleCubeVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
 
-    //unsigned int EBO;
-    // Generate one buffer
-    //glGenBuffers(1, &EBO);
-
-    // Bind the VertexArrayBuffer
-    glBindVertexArray(VAO);
-    // Bind GL_ARRAY_BUFFER to VBO
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    // Copy the vertices data to GPU
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    // Bind GL_ELEMENT_ARRAY_BUFFER to EBO
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    // Copy the indexes to GPU
-    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexes), indexes, GL_STATIC_DRAW);
-    // Set the attributes of the vertices
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)0);
-    // Enable the attribute at position 0
+    glBufferData(GL_ARRAY_BUFFER, sizeof(simpleCube), simpleCube, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
-    // Set vertex color attributes
-    //glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
-    // Enable the attribute at position 1
-    //glEnableVertexAttribArray(1);
-    // Set texture coordinates attributes
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
-    // Enable the attribute at position 2
-    glEnableVertexAttribArray(2);
-    // Variables to keep imagem information
 
-    Texture wooden("../resources/textures/wooden.jpg", GL_TEXTURE0);
-    wooden.activateUnit();
-    wooden.bind();
-    wooden.configure();
-    wooden.unbind();
-    stbi_set_flip_vertically_on_load(true);
-    Texture face("../resources/textures/awesomeface.png", GL_TEXTURE1);
-    face.setType(GL_RGBA);
-    face.activateUnit();
-    face.bind();
-    face.configure();
-    face.unbind();
-
-    // Unbind the buffers
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
     glBindVertexArray(0);
-    //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
+    glBindBuffer(GL_VERTEX_ARRAY, 0);
 
     glm::mat4 model = glm::mat4(1.0), projection = glm::mat4(1.0);
     projection = glm::perspective(glm::radians(45.0f), 800.f / 600.f, .1f, 1000.f);
+    shader->use();
+    shader->setUniformMat4("projection", projection);
+    lightShader->use();
+    lightShader->setUniformMat4("projection", projection);
 
-    glm::vec3 cubePositions[] = {
-        glm::vec3(0.0f, 0.0f, 0.0f),
-        glm::vec3(2.0f, 5.0f, -15.0f),
-        glm::vec3(-1.5f, -2.2f, -2.5f),
-        glm::vec3(-3.8f, -2.0f, -12.3f),
-        glm::vec3(2.4f, -0.4f, -3.5f),
-        glm::vec3(-1.7f, 3.0f, -7.5f),
-        glm::vec3(1.3f, -2.0f, -2.5f),
-        glm::vec3(1.5f, 2.0f, -2.5f),
-        glm::vec3(1.5f, 0.2f, -1.5f),
-        glm::vec3(-1.3f, 1.0f, -1.5f)};
     last = glfwGetTime();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     Camera c(vec3(0, 0, 3), vec3(0, 0, -1));
@@ -211,37 +158,34 @@ int main(int argc, char const *argv[])
         last = current;
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // Bind the shader program
-        wooden.activateUnit();
-        wooden.bind();
-        face.activateUnit();
-        face.bind();
+        // Draw cube
         shader->use();
-        // Bind the VAO
-        glBindVertexArray(VAO);
-        for (int i = 0; i < sizeof(cubePositions); i++)
-        {
-            model = glm::mat4(1.f);
-            model = glm::translate(model, cubePositions[i]);
-            model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1, cubePositions[i].y, cubePositions[i].z));
-            shader->setUniform1i("texture1", 0);
-            shader->setUniform1i("texture2", 1);
-            shader->setUniformMat4("model", model);
-            shader->setUniformMat4("view", view);
-            shader->setUniformMat4("projection", projection);
-            // Draw the Cube
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        shader->setUniformVec3("objectColor", vec3(1.0, 0.5, .4));
+        shader->setUniformVec3("lightColor", vec3(1.0, 1.0, 1.0));
+        glBindVertexArray(simpleCubeVAO);
+        model = glm::mat4(1.0);
+        shader->setUniformMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        // Draw cube "lamp"
+        lightShader->use();
+        model = glm::mat4(1.0);
+        model = glm::translate(model, vec3(1.0, .5, .3));
+        model = glm::scale(model, vec3(.3, .3, .3));
+        lightShader->setUniformMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
         view = c.update(window);
+        // Update views
+        lightShader->setUniformMat4("view", view);
+        shader->use();
+        shader->setUniformMat4("view", view);
     }
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    //glDeleteBuffers(1, &EBO);
-    //glDeleteTextures(1, &texture);
+    glDeleteVertexArrays(1, &simpleCubeVAO);
+    glDeleteBuffers(1, &simpleCubeVBO);
     delete shader;
+    delete lightShader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
