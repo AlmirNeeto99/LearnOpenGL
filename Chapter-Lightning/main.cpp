@@ -149,8 +149,8 @@ int main(int argc, char const *argv[])
 
     last = glfwGetTime();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    Camera c(vec3(0, 0, 5), vec3(0, 0, -5));
-    glm::vec4 lightPos(5.0, 1.0, 2.0, 1.0);
+    Camera c(vec3(0, 15, 30), vec3(0, -15, -30));
+    glm::vec4 lightPos(0, 5.0, 0.0, 1.0);
     while (!glfwWindowShouldClose(window))
     {
         current = glfwGetTime();
@@ -162,9 +162,9 @@ int main(int argc, char const *argv[])
         glBindVertexArray(simpleCubeVAO);
         lightShader->use();
         model = glm::mat4(1.0);
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1.0, 0, 0));
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25), glm::vec3(1.0, 0, 0));
         model = glm::translate(model, vec3(0, 5, 0));
-        model = glm::scale(model, vec3(.3, .3, .3));
+        model = glm::scale(model, vec3(.2, .2, .2));
         lightPos = model * lightPos;
         lightShader->setUniformMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
@@ -173,6 +173,7 @@ int main(int argc, char const *argv[])
         shader->setUniformVec3("objectColor", vec3(1.0, 0.5, .4));
         shader->setUniformVec3("lightColor", vec3(1.0, 1.0, 1.0));
         shader->setUniformVec3("lightPos", lightPos);
+        shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
