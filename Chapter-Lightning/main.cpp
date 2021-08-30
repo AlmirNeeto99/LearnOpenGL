@@ -163,7 +163,7 @@ int main(int argc, char const *argv[])
         lightShader->use();
         model = glm::mat4(1.0);
         model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1.0, 0, 0));
-        model = glm::translate(model, vec3(1.0, 5, .3));
+        model = glm::translate(model, vec3(0, 5, 0));
         model = glm::scale(model, vec3(.3, .3, .3));
         lightPos = model * lightPos;
         lightShader->setUniformMat4("model", model);
