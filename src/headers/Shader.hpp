@@ -13,8 +13,9 @@ public:
     ~Shader();
     int getId();
     void use();
-    void setUniform1i(std::string, int value);
-    void setUniformMat4(std::string, glm::mat4 mtx);
+    void setUniform1i(std::string name, int value);
+    void setUniformMat4(std::string name, glm::mat4 mtx);
+    void setUniformVec3(std::string name, glm::vec3 vec);
 
 private:
     unsigned int id;
