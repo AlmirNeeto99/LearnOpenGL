@@ -132,14 +132,13 @@ int main(int argc, char const *argv[])
     glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(simpleCube), simpleCube, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
     glBindVertexArray(0);
-
-    glBindVertexArray(0);
-    glBindBuffer(GL_VERTEX_ARRAY, 0);
 
     glm::mat4 model = glm::mat4(1.0), projection = glm::mat4(1.0);
     projection = glm::perspective(glm::radians(45.0f), 800.f / 600.f, .1f, 1000.f);
@@ -150,7 +149,8 @@ int main(int argc, char const *argv[])
 
     last = glfwGetTime();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    Camera c(vec3(0, 0, 3), vec3(0, 0, -1));
+    Camera c(vec3(0, 0, 5), vec3(0, 0, -5));
+    glm::vec4 lightPos(5.0, 1.0, 2.0, 1.0);
     while (!glfwWindowShouldClose(window))
     {
         current = glfwGetTime();
@@ -159,25 +159,29 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // Draw cube
+        glBindVertexArray(simpleCubeVAO);
+        lightShader->use();
+        model = glm::mat4(1.0);
+        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 50), glm::vec3(1.0, 0, 0));
+        model = glm::translate(model, vec3(1.0, 5, .3));
+        model = glm::scale(model, vec3(.3, .3, .3));
+        lightPos = model * lightPos;
+        lightShader->setUniformMat4("model", model);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        Shader::unbind();
         shader->use();
         shader->setUniformVec3("objectColor", vec3(1.0, 0.5, .4));
         shader->setUniformVec3("lightColor", vec3(1.0, 1.0, 1.0));
-        glBindVertexArray(simpleCubeVAO);
+        shader->setUniformVec3("lightPos", lightPos);
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        // Draw cube "lamp"
-        lightShader->use();
-        model = glm::mat4(1.0);
-        model = glm::translate(model, vec3(1.0, .5, .3));
-        model = glm::scale(model, vec3(.3, .3, .3));
-        lightShader->setUniformMat4("model", model);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
         view = c.update(window);
         // Update views
+        lightShader->use();
         lightShader->setUniformMat4("view", view);
         shader->use();
         shader->setUniformMat4("view", view);
