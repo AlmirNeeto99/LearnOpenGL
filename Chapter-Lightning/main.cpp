@@ -15,7 +15,7 @@
 glm::vec3 position = glm::vec3(0, 0, 3);
 glm::vec3 direction = glm::vec3(0, 0, -1);
 glm::vec3 up = glm::vec3(0, 1, 0);
-float last, delta, current;
+float last = .0f, delta = 0.0f, current;
 glm::mat4 view = glm::mat4(1.0);
 
 void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
@@ -144,7 +144,6 @@ int main(int argc, char const *argv[])
     lightShader->use();
     lightShader->setUniformMat4("projection", projection);
 
-    last = glfwGetTime();
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     Camera c(vec3(0, 15, 30), vec3(0, -15, -30));
     glm::vec4 lightPos(0, 5.0, 0.0, 1.0);
