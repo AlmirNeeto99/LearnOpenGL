@@ -88,7 +88,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Materials", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(1080, 720, "LearnOpenGL - Materials", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -101,7 +101,7 @@ int main(int argc, char const *argv[])
         return -1;
     }
     // Set the Open GL viewport
-    glViewport(0, 0, 800, 600);
+    glViewport(0, 0, 1080, 720);
     // Set the clear color
     glClearColor(.0f, .0f, .0f, 1.f);
     // Enabling depth test so faces won't overlap
@@ -141,6 +141,15 @@ int main(int argc, char const *argv[])
     projection = glm::perspective(glm::radians(45.0f), 800.f / 600.f, .1f, 1000.f);
     shader->use();
     shader->setUniformMat4("projection", projection);
+    // Material
+    shader->setUniformVec3("material.ambient", glm::vec3(1.0f, 0.5f, 0.31f));
+    shader->setUniformVec3("material.diffuse", glm::vec3(1.0f, 0.5f, 0.31f));
+    shader->setUniformVec3("material.specular", glm::vec3(0.5f, 0.5f, 0.5f));
+    shader->setUniform1f("material.shininess", 32.f);
+    // Light color
+    shader->setUniformVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
+    shader->setUniformVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // darken diffuse light a bit
+    shader->setUniformVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
     lightShader->use();
     lightShader->setUniformMat4("projection", projection);
 
@@ -166,9 +175,7 @@ int main(int argc, char const *argv[])
         glDrawArrays(GL_TRIANGLES, 0, 36);
         Shader::unbind();
         shader->use();
-        shader->setUniformVec3("objectColor", vec3(1.0, 0.5, .4));
-        shader->setUniformVec3("lightColor", vec3(1.0, 1.0, 1.0));
-        shader->setUniformVec3("lightPos", lightPos);
+        shader->setUniformVec3("light.position", lightPos);
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
