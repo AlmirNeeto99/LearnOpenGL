@@ -88,7 +88,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Lightning", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Materials", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -112,8 +112,8 @@ int main(int argc, char const *argv[])
     Shader *lightShader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/lightning/vertex.vert", "../resources/shaders/lightning/fragment.frag");
-        lightShader = new Shader("../resources/shaders/lightning/vertex.vert", "../resources/shaders/lightning/lamp.frag");
+        shader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/materials/fragment.frag");
+        lightShader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/materials/lamp.frag");
     }
     catch (const std::exception &ex)
     {
