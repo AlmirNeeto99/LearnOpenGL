@@ -138,7 +138,7 @@ int main(int argc, char const *argv[])
     glBindVertexArray(0);
 
     glm::mat4 model = glm::mat4(1.0), projection = glm::mat4(1.0);
-    projection = glm::perspective(glm::radians(45.0f), 800.f / 600.f, .1f, 1000.f);
+    projection = glm::perspective(glm::radians(45.0f), 1080.f / 720.f, .1f, 1000.f);
     shader->use();
     shader->setUniformMat4("projection", projection);
     // Material
