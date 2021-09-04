@@ -11,6 +11,7 @@
 #include "glm/glm.hpp"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include "../src/headers/ScreenSaver.hpp"
 
 glm::vec3 position = glm::vec3(0, 0, 3);
 glm::vec3 direction = glm::vec3(0, 0, -1);
@@ -23,6 +24,10 @@ void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
     if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
     {
         glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+    {
+        ScreenSaver::print(window);
     }
 }
 
