@@ -117,3 +117,8 @@ void Shader::setUniformVec3(std::string name, glm::vec3 vec)
 {
     glUniform3fv(glGetUniformLocation(this->id, name.c_str()), 1, glm::value_ptr(vec));
 }
+
+void Shader::setUniform1f(std::string name, float value)
+{
+    glUniform1f(glGetUniformLocation(this->id, name.c_str()), value);
+}
