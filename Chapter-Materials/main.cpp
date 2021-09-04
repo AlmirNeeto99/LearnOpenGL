@@ -18,6 +18,7 @@ glm::vec3 direction = glm::vec3(0, 0, -1);
 glm::vec3 up = glm::vec3(0, 1, 0);
 float last = .0f, delta = 0.0f, current;
 glm::mat4 view = glm::mat4(1.0);
+bool printing = false;
 
 void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
@@ -25,9 +26,13 @@ void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
     {
         glfwSetWindowShouldClose(window, true);
     }
-    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS)
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS && !printing)
     {
+        printing = true;
         ScreenSaver::print(window);
+    }
+    if(glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE){
+        printing = false;
     }
 }
 
