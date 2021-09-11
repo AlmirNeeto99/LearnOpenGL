@@ -43,47 +43,48 @@ void framebuffer_resize(GLFWwindow *window, int width, int height)
 }
 
 GLfloat simpleCube[] = {
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f,
+    // positions          // normals           // texture coords
+    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,
+    -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,
 
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+    -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
 
-    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
 
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,
 
-    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
-    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
-    -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f,
-    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+    0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+    -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+    -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f,
 
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
-    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
-    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f,
-    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f};
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+    0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,
+    -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f,
+    -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f};
 
 int main(int argc, char const *argv[])
 {
@@ -123,8 +124,8 @@ int main(int argc, char const *argv[])
     Shader *lightShader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/materials/fragment.frag");
-        lightShader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/lightning/lamp.frag");
+        shader = new Shader("../resources/shaders/lightning-maps/vertex.vert", "../resources/shaders/lightning-maps/fragment.frag");
+        lightShader = new Shader("../resources/shaders/lightning-maps/vertex.vert", "../resources/shaders/lightning/lamp.frag");
     }
     catch (const std::exception &ex)
     {
@@ -157,10 +158,12 @@ int main(int argc, char const *argv[])
     glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
 
     glBufferData(GL_ARRAY_BUFFER, sizeof(simpleCube), simpleCube, GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (void *)(6 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, simpleCubeVBO);
     glBindVertexArray(0);
@@ -170,8 +173,7 @@ int main(int argc, char const *argv[])
     shader->use();
     shader->setUniformMat4("projection", projection);
     // Material
-    shader->setUniformVec3("material.ambient", glm::vec3(1.0f, 0.5f, 0.31f));
-    shader->setUniformVec3("material.diffuse", glm::vec3(1.0f, 0.5f, 0.31f));
+    shader->setUniform1i("material.diffuse", 0);
     shader->setUniformVec3("material.specular", glm::vec3(0.5f, 0.5f, 0.5f));
     shader->setUniform1f("material.shininess", 32.f);
     // Light color
@@ -207,7 +209,11 @@ int main(int argc, char const *argv[])
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
+        diff.activateUnit();
+        diff.bind();
         glDrawArrays(GL_TRIANGLES, 0, 36);
+        diff.unbind();
+        diff.deactivateUnit();
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
