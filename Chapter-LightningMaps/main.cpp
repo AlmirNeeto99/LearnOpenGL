@@ -134,7 +134,7 @@ int main(int argc, char const *argv[])
     }
 
     Texture diff("../resources/textures/container2.png", GL_TEXTURE0);
-    Texture spec("../resources/textures/container2_specular.png", GL_TEXTURE1);
+    Texture spec("../resources/textures/lighting_maps_specular_color.png", GL_TEXTURE1);
 
     diff.activateUnit();
     diff.bind();
