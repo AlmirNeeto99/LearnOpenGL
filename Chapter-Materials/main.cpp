@@ -31,7 +31,8 @@ void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
         printing = true;
         ScreenSaver::print(window);
     }
-    if(glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE){
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE)
+    {
         printing = false;
     }
 }
