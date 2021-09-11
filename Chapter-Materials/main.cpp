@@ -123,7 +123,7 @@ int main(int argc, char const *argv[])
     try
     {
         shader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/materials/fragment.frag");
-        lightShader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/materials/lamp.frag");
+        lightShader = new Shader("../resources/shaders/materials/vertex.vert", "../resources/shaders/lightning/lamp.frag");
     }
     catch (const std::exception &ex)
     {
