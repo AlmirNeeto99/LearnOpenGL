@@ -174,7 +174,7 @@ int main(int argc, char const *argv[])
     shader->setUniformMat4("projection", projection);
     // Material
     shader->setUniform1i("material.diffuse", 0);
-    shader->setUniformVec3("material.specular", glm::vec3(0.5f, 0.5f, 0.5f));
+    shader->setUniform1i("material.specular", 1);
     shader->setUniform1f("material.shininess", 32.f);
     // Light color
     shader->setUniformVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
@@ -209,11 +209,17 @@ int main(int argc, char const *argv[])
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
+        // Applying diffuse texture
         diff.activateUnit();
         diff.bind();
+        // Applying specular texture
+        spec.activateUnit();
+        spec.bind();
         glDrawArrays(GL_TRIANGLES, 0, 36);
         diff.unbind();
         diff.deactivateUnit();
+        spec.unbind();
+        spec.deactivateUnit();
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
