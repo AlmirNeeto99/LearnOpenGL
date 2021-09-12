@@ -135,6 +135,7 @@ int main(int argc, char const *argv[])
 
     Texture diff("../resources/textures/container2.png", GL_TEXTURE0);
     Texture spec("../resources/textures/container2_specular.png", GL_TEXTURE1);
+    Texture matrix("../resources/textures/matrix.jpg", GL_TEXTURE2);
 
     diff.activateUnit();
     diff.bind();
@@ -149,6 +150,12 @@ int main(int argc, char const *argv[])
     spec.configure();
     spec.unbind();
     spec.deactivateUnit();
+
+    matrix.activateUnit();
+    matrix.bind();
+    matrix.configure();
+    matrix.unbind();
+    matrix.deactivateUnit();
 
     unsigned int simpleCubeVAO, simpleCubeVBO;
     glGenBuffers(1, &simpleCubeVBO);
@@ -175,6 +182,7 @@ int main(int argc, char const *argv[])
     // Material
     shader->setUniform1i("material.diffuse", 0);
     shader->setUniform1i("material.specular", 1);
+    shader->setUniform1i("material.emission", 2);
     shader->setUniform1f("material.shininess", 32.f);
     // Light color
     shader->setUniformVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
@@ -215,11 +223,16 @@ int main(int argc, char const *argv[])
         // Applying specular texture
         spec.activateUnit();
         spec.bind();
+        // Applying emission
+        matrix.activateUnit();
+        matrix.bind();
         glDrawArrays(GL_TRIANGLES, 0, 36);
         diff.unbind();
         diff.deactivateUnit();
         spec.unbind();
         spec.deactivateUnit();
+        matrix.unbind();
+        matrix.deactivateUnit();
         // Swap Buffer and handle events
         glfwSwapBuffers(window);
         glfwPollEvents();
