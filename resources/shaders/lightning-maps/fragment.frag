@@ -24,6 +24,7 @@ uniform vec3 viewPos;
 
 uniform Material material;
 uniform Light light;
+uniform float time;
 
 void main(){
     vec3 norm = normalize(Normal);
@@ -39,7 +40,7 @@ void main(){
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * vec3(texture2D(material.specular, TexCoords));
     // Emission
-    vec3 emission = vec3(texture2D(material.emission, TexCoords));
+    vec3 emission = vec3(texture2D(material.emission, TexCoords + vec2(0, time)));
     // If the fragment is outsite specular map, show emission color
     vec3 show = step(vec3(1.0), vec3(1.0) - vec3(texture2D(material.specular, TexCoords)));
     // Apply color

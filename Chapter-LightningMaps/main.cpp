@@ -213,6 +213,7 @@ int main(int argc, char const *argv[])
         glDrawArrays(GL_TRIANGLES, 0, 36);
         Shader::unbind();
         shader->use();
+        shader->setUniform1f("time", glfwGetTime());
         shader->setUniformVec3("light.position", lightPos);
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
