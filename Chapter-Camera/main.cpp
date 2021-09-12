@@ -103,6 +103,7 @@ int main(int argc, char const *argv[])
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
     GLFWwindow *window = glfwCreateWindow(800, 600, "LearnOpenGL - Camera", NULL, NULL);
+    glfwSetWindowPos(window, (1366 - 800) / 2, (800 - 600) / 2);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
