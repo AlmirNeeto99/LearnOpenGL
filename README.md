@@ -30,6 +30,16 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Creating Window
 - [x] Hello Window
 - [x] Hello Triangle
+
+<div style="display: flex; justify-content: space-evenly">
+    <div style="width: 40%">
+        <img src="resources/images/hello-triangle.png" alt="Hello Triangle" />
+        <p style="text-align: center; font-size: 12px">
+            Hello Triangle
+        </p>
+    </div>
+</div>
+
 - [x] Shaders
 - [x] Textures
 - [x] Transformations
