@@ -192,7 +192,7 @@ int main(int argc, char const *argv[])
     lightShader->setUniformMat4("projection", projection);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    Camera c(vec3(0, 15, 30), vec3(0, -15, -30));
+    Camera c(vec3(0, 0, 5), vec3(0, 0, -5));
     glm::vec4 lightPos(0, 5.0, 0.0, 1.0);
     while (!glfwWindowShouldClose(window))
     {
