@@ -32,72 +32,69 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Hello Triangle
 
 <div>
-    <p style="text-align: center">
+    <p>
         <img width="50%" src="resources/images/hello-triangle.png" alt="Hello Triangle" />
     </p>
-    <p style="text-align: center; font-size: 12px">
-        Hello Triangle
-    </p>
 </div>
+
+---
 
 - [x] Shaders
 
 <div>
-    <p style="text-align: center">
+    <p>
          <img width="50%" src="resources/images/shader.png" alt="Shader" />
     </p>
-    <p style="text-align: center; font-size: 12px">
-        Shader
-    </p>
 </div>
+
+---
 
 - [x] Textures
 
 <div>
-    <p align="center">
+    <p>
          <img width="50%" src="resources/images/texture.png" alt="Texture" />
     </p>
-    <p style="text-align: center; font-size: 12px">
-        Texture
-    </p>
 </div>
+
+---
 
 - [x] Transformations
 - [x] Coordinate Systems
 - [x] Camera
 
 <div>
-    <p style="text-align: center">
+    <p>
          <img width="50%" src="resources/images/Camera.gif" alt="Camera Flying" />
     </p>
-    <p style="text-align: center; font-size: 12px">
+    <p>
         Camera Flying around
     </p>
 </div>
+
+---
 
 - [x] Colors
 - [x] Lightning
 - [x] Materials
 - [x] Lighting maps
 
-<div style="text-align: center">
-    <div style="width: 45%; display: inline-block;">
-        <p style="text-align: center">
-            <img src="resources/images/1631416736.png" alt="Emission Map" />
-        </p>
-        <p style="text-align: center; font-size: 12px">
-            Matrix emission map
-        </p>
-    </div>
-    <div style="width: 45%;  display: inline-block;">
-        <p style="text-align: center">
-            <img src="resources/images/1631401415.png" alt="Specular Map" />
-        </p>
-        <p style="text-align: center; font-size: 12px">
-            Specular map
-        </p>
-    </div>
-</div>
+<p>
+    <img width="40%" src="resources/images/1631416736.png" alt="Emission Map" />
+    <p>
+        Emission map
+    </p>
+</p>
+
+<p>
+    <img width="40%" src="resources/images/1631401415.png" alt="Specular Map" />
+    <p>
+        Specular map
+    </p>
+</p>
+
+
+---
 
 - [ ] Light casters
 - [ ] Multiple lights
