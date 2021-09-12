@@ -35,6 +35,16 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Transformations
 - [x] Coordinate Systems
 - [x] Camera
+
+<div style="display: flex; justify-content: space-evenly">
+    <div style="width: 40%">
+        <img src="resources/images/Camera.gif" alt="Camera Flying" />
+        <p style="text-align: center; font-size: 12px">
+            Camera Flying around
+        </p>
+    </div>
+</div>
+
 - [x] Colors
 - [x] Lightning
 - [x] Materials
@@ -43,9 +53,15 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 <div style="display: flex; justify-content: space-evenly">
     <div style="width: 40%">
         <img src="resources/images/1631401415.png" alt="Specular Map" />
+        <p style="text-align: center; font-size: 12px">
+            Specular map
+        </p>
     </div>
     <div style="width: 40%">
         <img src="resources/images/1631416736.png" alt="Emission Map" />
+        <p style="text-align: center; font-size: 12px">
+            Matrix emission map
+        </p>
     </div>
 </div>
 
