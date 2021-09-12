@@ -31,79 +31,73 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Hello Window
 - [x] Hello Triangle
 
-<table style="width: 40%;margin:auto;">
-    <tr>
-        <td>
-            <img src="resources/images/hello-triangle.png" alt="Hello Triangle" />
-            <p style="text-align: center; font-size: 12px">
-                Hello Triangle
-            </p>
-        </td>
-    </tr>
-</table>
+<div>
+    <p style="text-align: center">
+        <img width="50%" src="resources/images/hello-triangle.png" alt="Hello Triangle" />
+    </p>
+    <p style="text-align: center; font-size: 12px">
+        Hello Triangle
+    </p>
+</div>
 
 - [x] Shaders
 
-<table style="width: 40%;margin: auto;">
-    <tr>
-        <td>
-            <img src="resources/images/shader.png" alt="Shader" />
-            <p style="text-align: center; font-size: 12px">
-                Shader
-            </p>
-        </td>
-    </tr>
-</table>
+<div>
+    <p style="text-align: center">
+         <img width="50%" src="resources/images/shader.png" alt="Shader" />
+    </p>
+    <p style="text-align: center; font-size: 12px">
+        Shader
+    </p>
+</div>
 
 - [x] Textures
 
-<table style="width: 40%;margin: auto;">
-    <tr>
-        <td>
-            <img src="resources/images/texture.png" alt="Texture" />
-            <p style="text-align: center; font-size: 12px">
-                Texture
-            </p>
-        </td>
-    </tr>
-</table>
+<div>
+    <p style="text-align: center">
+         <img width="50%" src="resources/images/texture.png" alt="Texture" />
+    </p>
+    <p style="text-align: center; font-size: 12px">
+        Texture
+    </p>
+</div>
 
 - [x] Transformations
 - [x] Coordinate Systems
 - [x] Camera
 
-<table style="width: 40%;margin: auto;">
-    <tr>
-        <td>
-            <img src="resources/images/Camera.gif" alt="Camera Flying" />
-            <p style="text-align: center; font-size: 12px">
-                Camera Flying around
-            </p>
-        </td>
-    </tr>
-</table>
+<div>
+    <p style="text-align: center">
+         <img width="50%" src="resources/images/Camera.gif" alt="Camera Flying" />
+    </p>
+    <p style="text-align: center; font-size: 12px">
+        Camera Flying around
+    </p>
+</div>
 
 - [x] Colors
 - [x] Lightning
 - [x] Materials
 - [x] Lighting maps
 
-<table>
-    <tr>
-        <td style="width: 40%">
-            <img src="resources/images/1631401415.png" alt="Specular Map" />
-            <p style="text-align: center; font-size: 12px">
-                Specular map
-            </p>
-        </td>
-        <td style="width: 40%">
+<div style="text-align: center">
+    <div style="width: 45%; display: inline-block;">
+        <p style="text-align: center">
             <img src="resources/images/1631416736.png" alt="Emission Map" />
-            <p style="text-align: center; font-size: 12px">
-                Matrix emission map
-            </p>
-        </td>
-    </tr>
-</table>
+        </p>
+        <p style="text-align: center; font-size: 12px">
+            Matrix emission map
+        </p>
+    </div>
+    <div style="width: 45%;  display: inline-block;">
+        <p style="text-align: center">
+            <img src="resources/images/1631401415.png" alt="Specular Map" />
+        </p>
+        <p style="text-align: center; font-size: 12px">
+            Specular map
+        </p>
+    </div>
+</div>
 
 - [ ] Light casters
 - [ ] Multiple lights
