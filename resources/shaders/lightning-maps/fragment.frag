@@ -3,6 +3,7 @@
 struct Material {
     sampler2D diffuse;
     sampler2D specular;
+    sampler2D emission;
     float shininess;
 };
 
@@ -37,7 +38,11 @@ void main(){
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 specular = light.specular * spec * vec3(texture2D(material.specular, TexCoords));
+    // Emission
+    vec3 emission = vec3(texture2D(material.emission, TexCoords));
+    // If the fragment is outsite specular map, show emission color
+    vec3 show = step(vec3(1.0), vec3(1.0) - vec3(texture2D(material.specular, TexCoords)));
     // Apply color
-    vec3 result = ambient + diffuse + specular;
+    vec3 result = ambient + diffuse + specular + (emission * show);
     FragColor = vec4(result, 1.0);
 }
