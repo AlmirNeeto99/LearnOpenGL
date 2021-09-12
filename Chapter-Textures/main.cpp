@@ -6,6 +6,26 @@
 #include <cmath>
 #include "../src/headers/Shader.hpp"
 #include "../src/headers/Texture.hpp"
+#include "../src/headers/ScreenSaver.hpp"
+
+bool printing = false;
+
+void handle_key(GLFWwindow *window, int key, int scancode, int action, int mode)
+{
+    if (GLFW_KEY_ESCAPE == key && GLFW_PRESS == action)
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS && !printing)
+    {
+        printing = true;
+        ScreenSaver::print(window);
+    }
+    if (glfwGetKey(window, GLFW_KEY_P) == GLFW_RELEASE)
+    {
+        printing = false;
+    }
+}
 
 void framebuffer_resize(GLFWwindow *window, int width, int height)
 {
@@ -54,6 +74,7 @@ int main(int argc, char const *argv[])
     // Set the clear color
     glClearColor(.3f, .3f, .3f, 1.f);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
+    glfwSetKeyCallback(window, handle_key);
     Shader *shader = NULL;
     try
     {

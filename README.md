@@ -42,6 +42,16 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 
 - [x] Shaders
 - [x] Textures
+
+<div style="display: flex; justify-content: space-evenly">
+    <div style="width: 40%">
+        <img src="resources/images/texture.png" alt="Texture" />
+        <p style="text-align: center; font-size: 12px">
+            Texture
+        </p>
+    </div>
+</div>
+
 - [x] Transformations
 - [x] Coordinate Systems
 - [x] Camera
