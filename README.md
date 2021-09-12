@@ -80,20 +80,22 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Materials
 - [x] Lighting maps
 
-<div style="display: flex; justify-content: space-evenly">
-    <div style="width: 40%">
-        <img src="resources/images/1631401415.png" alt="Specular Map" />
-        <p style="text-align: center; font-size: 12px">
-            Specular map
-        </p>
-    </div>
-    <div style="width: 40%">
-        <img src="resources/images/1631416736.png" alt="Emission Map" />
-        <p style="text-align: center; font-size: 12px">
-            Matrix emission map
-        </p>
-    </div>
-</div>
+<table>
+    <tr>
+        <td>
+            <img src="resources/images/1631401415.png" alt="Specular Map" />
+            <p style="text-align: center; font-size: 12px">
+                Specular map
+            </p>
+        </td>
+        <td>
+            <img src="resources/images/1631416736.png" alt="Emission Map" />
+            <p style="text-align: center; font-size: 12px">
+                Matrix emission map
+            </p>
+        </td>
+    </tr>
+</table>
 
 - [ ] Light casters
 - [ ] Multiple lights
