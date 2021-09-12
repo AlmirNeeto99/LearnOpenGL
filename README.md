@@ -54,7 +54,7 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Textures
 
 <div>
-    <p style="align: center">
+    <p align="center">
          <img width="50%" src="resources/images/texture.png" alt="Texture" />
     </p>
     <p style="text-align: center; font-size: 12px">
