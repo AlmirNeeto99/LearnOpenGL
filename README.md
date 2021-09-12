@@ -31,49 +31,57 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 - [x] Hello Window
 - [x] Hello Triangle
 
-<div style="display: flex; justify-content: space-evenly">
-    <div style="width: 40%">
-        <img src="resources/images/hello-triangle.png" alt="Hello Triangle" />
-        <p style="text-align: center; font-size: 12px">
-            Hello Triangle
-        </p>
-    </div>
-</div>
+<table style="width: 40%;margin:auto;">
+    <tr>
+        <td>
+            <img src="resources/images/hello-triangle.png" alt="Hello Triangle" />
+            <p style="text-align: center; font-size: 12px">
+                Hello Triangle
+            </p>
+        </td>
+    </tr>
+</table>
 
 - [x] Shaders
 
-<div style="display: flex; justify-content: space-evenly">
-    <div style="width: 40%">
-        <img src="resources/images/shader.png" alt="Shader" />
-        <p style="text-align: center; font-size: 12px">
-            Shader
-        </p>
-    </div>
-</div>
+<table style="width: 40%;margin: auto;">
+    <tr>
+        <td>
+            <img src="resources/images/shader.png" alt="Shader" />
+            <p style="text-align: center; font-size: 12px">
+                Shader
+            </p>
+        </td>
+    </tr>
+</table>
 
 - [x] Textures
 
-<div style="display: flex; justify-content: space-evenly">
-    <div style="width: 40%">
-        <img src="resources/images/texture.png" alt="Texture" />
-        <p style="text-align: center; font-size: 12px">
-            Texture
-        </p>
-    </div>
-</div>
+<table style="width: 40%;margin: auto;">
+    <tr>
+        <td>
+            <img src="resources/images/texture.png" alt="Texture" />
+            <p style="text-align: center; font-size: 12px">
+                Texture
+            </p>
+        </td>
+    </tr>
+</table>
 
 - [x] Transformations
 - [x] Coordinate Systems
 - [x] Camera
 
-<div style="display: flex; justify-content: space-evenly">
-    <div style="width: 40%">
-        <img src="resources/images/Camera.gif" alt="Camera Flying" />
-        <p style="text-align: center; font-size: 12px">
-            Camera Flying around
-        </p>
-    </div>
-</div>
+<table style="width: 40%;margin: auto;">
+    <tr>
+        <td>
+            <img src="resources/images/Camera.gif" alt="Camera Flying" />
+            <p style="text-align: center; font-size: 12px">
+                Camera Flying around
+            </p>
+        </td>
+    </tr>
+</table>
 
 - [x] Colors
 - [x] Lightning
@@ -82,13 +90,13 @@ So `HelloTriangle` Chapter executable will be inside `Chapter-HelloTriangle`, yo
 
 <table>
     <tr>
-        <td>
+        <td style="width: 40%">
             <img src="resources/images/1631401415.png" alt="Specular Map" />
             <p style="text-align: center; font-size: 12px">
                 Specular map
             </p>
         </td>
-        <td>
+        <td style="width: 40%">
             <img src="resources/images/1631416736.png" alt="Emission Map" />
             <p style="text-align: center; font-size: 12px">
                 Matrix emission map
