@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(1080, 720, "LearnOpenGL - Materials", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(1080, 720, "LearnOpenGL - LightningMaps", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
