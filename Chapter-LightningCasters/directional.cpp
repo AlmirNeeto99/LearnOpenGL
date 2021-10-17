@@ -183,6 +183,9 @@ int main(int argc, char const *argv[])
     lightShader->use();
     lightShader->setUniformMat4("projection", projection);
 
+    glm::vec3 positions[15] = {
+        {8, .1f, 9}, {-1, 6, 3}, {7, 5, 8}, {-6, 3, 7}, {5, 7, 1}, {-4, 6, -1}, {3, 5, 7}, {-3, 3, 4}, {9, 5, -6}, {-6, 7, 3}, {-6, -2, -7}, {-7, 5, 7}, {1, 2, 7}, {-3, -7, 4}, {6, -6, 8}};
+
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     Camera c(vec3(0, 15, 30), vec3(0, -15, -30));
     glm::vec4 lightPos(0, 5.0, 0.0, 1.0);
@@ -193,15 +196,15 @@ int main(int argc, char const *argv[])
         last = current;
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        // Draw cube
         glBindVertexArray(simpleCubeVAO);
         lightShader->use();
         model = glm::mat4(1.0);
-        model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25), glm::vec3(1.0, 0, 0));
+        //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25), glm::vec3(1.0, 0, 0));
         model = glm::translate(model, vec3(0, 5, 0));
         model = glm::scale(model, vec3(.2, .2, .2));
         lightPos = model * lightPos;
         lightShader->setUniformMat4("model", model);
+        // Draw lamp
         glDrawArrays(GL_TRIANGLES, 0, 36);
         Shader::unbind();
         shader->use();
@@ -215,7 +218,14 @@ int main(int argc, char const *argv[])
         // Applying specular texture
         spec.activateUnit();
         spec.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+        // Draw cubes
+        for (int i = 0; i < 15; i++)
+        {
+            model = glm::mat4(1.0);
+            model = glm::translate(model, positions[i]);
+            shader->setUniformMat4("model", model);
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
         diff.unbind();
         diff.deactivateUnit();
         spec.unbind();
