@@ -124,8 +124,8 @@ int main(int argc, char const *argv[])
     Shader *lightShader = NULL;
     try
     {
-        shader = new Shader("../resources/shaders/lightning-maps/vertex.vert", "../resources/shaders/lightning-maps/fragment.frag");
-        lightShader = new Shader("../resources/shaders/lightning-maps/vertex.vert", "../resources/shaders/lightning/lamp.frag");
+        shader = new Shader("../resources/shaders/lightning-casters/vertex.vert", "../resources/shaders/lightning-casters/spotlight.frag");
+        lightShader = new Shader("../resources/shaders/lightning-casters/vertex.vert", "../resources/shaders/lightning/lamp.frag");
     }
     catch (const std::exception &ex)
     {
