@@ -18,6 +18,7 @@ public:
     void setUniformVec3(std::string name, glm::vec3 vec);
     void setUniformVec4(std::string name, glm::vec4 vec);
     void setUniform1f(std::string name, float value);
+    unsigned int getUniformLocation(std::string name);
     static void unbind();
 
 private:

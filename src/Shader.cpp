@@ -105,25 +105,30 @@ int Shader::getId()
 }
 void Shader::setUniform1i(std::string name, int value)
 {
-    glUniform1i(glGetUniformLocation(this->id, name.c_str()), value);
+    glUniform1i(this->getUniformLocation(name), value);
 }
 
 void Shader::setUniformMat4(std::string name, glm::mat4 mtx)
 {
-    glUniformMatrix4fv(glGetUniformLocation(this->id, name.c_str()), 1, GL_FALSE, glm::value_ptr(mtx));
+    glUniformMatrix4fv(this->getUniformLocation(name), 1, GL_FALSE, glm::value_ptr(mtx));
 }
 
 void Shader::setUniformVec3(std::string name, glm::vec3 vec)
 {
-    glUniform3fv(glGetUniformLocation(this->id, name.c_str()), 1, glm::value_ptr(vec));
+    glUniform3fv(this->getUniformLocation(name), 1, glm::value_ptr(vec));
 }
 
 void Shader::setUniformVec4(std::string name, glm::vec4 vec)
 {
-    glUniform4fv(glGetUniformLocation(this->id, name.c_str()), 1, glm::value_ptr(vec));
+    glUniform4fv(this->getUniformLocation(name), 1, glm::value_ptr(vec));
 }
 
 void Shader::setUniform1f(std::string name, float value)
 {
-    glUniform1f(glGetUniformLocation(this->id, name.c_str()), value);
+    glUniform1f(this->getUniformLocation(name), value);
+}
+
+unsigned int Shader::getUniformLocation(std::string name)
+{
+    return glGetUniformLocation(this->id, name.c_str());
 }
