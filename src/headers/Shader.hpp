@@ -16,6 +16,7 @@ public:
     void setUniform1i(std::string name, int value);
     void setUniformMat4(std::string name, glm::mat4 mtx);
     void setUniformVec3(std::string name, glm::vec3 vec);
+    void setUniformVec4(std::string name, glm::vec4 vec);
     void setUniform1f(std::string name, float value);
     static void unbind();
 
