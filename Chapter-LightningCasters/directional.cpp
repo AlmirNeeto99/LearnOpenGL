@@ -100,7 +100,7 @@ int main(int argc, char const *argv[])
     // Disable window resize button
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 
-    GLFWwindow *window = glfwCreateWindow(1080, 720, "LearnOpenGL - LightningCasters", NULL, NULL);
+    GLFWwindow *window = glfwCreateWindow(1080, 720, "LearnOpenGL - LightningCasters - Directional", NULL, NULL);
     if (!window)
     {
         std::cout << "Unable to create Window" << std::endl;
@@ -188,7 +188,7 @@ int main(int argc, char const *argv[])
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
     Camera c(vec3(0, 15, 30), vec3(0, -15, -30));
-    glm::vec4 lightPos(0, 5.0, 0.0, 1.0);
+    glm::vec4 lightDirection(-33.0f, -15.f, -7.0f, 0.0);
     while (!glfwWindowShouldClose(window))
     {
         current = glfwGetTime();
@@ -199,16 +199,14 @@ int main(int argc, char const *argv[])
         glBindVertexArray(simpleCubeVAO);
         lightShader->use();
         model = glm::mat4(1.0);
-        //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25), glm::vec3(1.0, 0, 0));
-        model = glm::translate(model, vec3(0, 5, 0));
+        model = glm::translate(model, vec3(-lightDirection)); // Move lamp into "direction" position
         model = glm::scale(model, vec3(.2, .2, .2));
-        lightPos = model * lightPos;
         lightShader->setUniformMat4("model", model);
         // Draw lamp
         glDrawArrays(GL_TRIANGLES, 0, 36);
         Shader::unbind();
         shader->use();
-        shader->setUniformVec3("light.position", lightPos);
+        shader->setUniformVec4("light.direction", lightDirection);
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);

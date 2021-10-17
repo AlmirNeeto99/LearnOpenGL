@@ -7,7 +7,7 @@ struct Material {
 };
 
 struct Light {
-    vec3 position;
+    vec4 direction;
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -26,7 +26,13 @@ uniform Light light;
 
 void main(){
     vec3 norm = normalize(Normal);
-    vec3 lightDir = normalize(light.position - FragPos);
+    vec3 lightDir, lightVector = vec3(light.direction);
+    // If w component is 0 treat as direction light
+    if(light.direction.w == 0.0){
+        lightDir = normalize(lightVector * -1);
+    } else{ // Else, treat as normal light
+        lightDir = normalize(lightVector - FragPos);
+    }
     // Diffuse lightning
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = light.diffuse * diff * vec3(texture2D(material.diffuse, TexCoords));
