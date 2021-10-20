@@ -121,11 +121,9 @@ int main(int argc, char const *argv[])
     glfwSetFramebufferSizeCallback(window, framebuffer_resize);
     glfwSetKeyCallback(window, handle_key);
     Shader *shader = NULL;
-    Shader *lightShader = NULL;
     try
     {
         shader = new Shader("../resources/shaders/lightning-casters/vertex.vert", "../resources/shaders/lightning-casters/spotlight.frag");
-        lightShader = new Shader("../resources/shaders/lightning-casters/vertex.vert", "../resources/shaders/lightning/lamp.frag");
     }
     catch (const std::exception &ex)
     {
@@ -180,8 +178,7 @@ int main(int argc, char const *argv[])
     shader->setUniformVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
     shader->setUniformVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // darken diffuse light a bit
     shader->setUniformVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
-    lightShader->use();
-    lightShader->setUniformMat4("projection", projection);
+    shader->setUniform1f("light.cutOff", glm::cos(glm::radians(12.5)));
 
     glm::vec3 positions[15] = {
         {8, .1f, 9}, {-1, 6, 3}, {7, 5, 8}, {-6, 3, 7}, {5, 7, 1}, {-4, 6, -1}, {3, 5, 7}, {-3, 3, 4}, {9, 5, -6}, {-6, 7, 3}, {-6, -2, -7}, {-7, 5, 7}, {1, 2, 7}, {-3, -7, 4}, {6, -6, 8}};
@@ -197,18 +194,7 @@ int main(int argc, char const *argv[])
         // Clear window
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glBindVertexArray(simpleCubeVAO);
-        lightShader->use();
-        model = glm::mat4(1.0);
-        //model = glm::rotate(model, glm::radians((float)glfwGetTime() * 25), glm::vec3(1.0, 0, 0));
-        model = glm::translate(model, vec3(0, 5, 0));
-        model = glm::scale(model, vec3(.2, .2, .2));
-        lightPos = model * lightPos;
-        lightShader->setUniformMat4("model", model);
-        // Draw lamp
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-        Shader::unbind();
         shader->use();
-        shader->setUniformVec3("light.position", lightPos);
         shader->setUniformVec3("viewPos", c.getPosition());
         model = glm::mat4(1.0);
         shader->setUniformMat4("model", model);
@@ -235,15 +221,14 @@ int main(int argc, char const *argv[])
         glfwPollEvents();
         view = c.update(window);
         // Update views
-        lightShader->use();
-        lightShader->setUniformMat4("view", view);
         shader->use();
+        shader->setUniformVec3("light.direction", c.getDirection());
+        shader->setUniformVec3("light.position", c.getPosition());
         shader->setUniformMat4("view", view);
     }
     glDeleteVertexArrays(1, &simpleCubeVAO);
     glDeleteBuffers(1, &simpleCubeVBO);
     delete shader;
-    delete lightShader;
     glfwDestroyWindow(window);
     glfwTerminate();
     return 0;
