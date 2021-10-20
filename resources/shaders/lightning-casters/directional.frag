@@ -6,7 +6,7 @@ struct Material {
     float shininess;
 };
 
-struct Light {
+struct DirectionalLight {
     vec4 direction;
     vec3 ambient;
     vec3 diffuse;
@@ -22,7 +22,7 @@ out vec4 FragColor;
 uniform vec3 viewPos;
 
 uniform Material material;
-uniform Light light;
+uniform DirectionalLight light;
 
 void main(){
     vec3 norm = normalize(Normal);
