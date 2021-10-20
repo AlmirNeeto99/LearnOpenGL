@@ -180,6 +180,9 @@ int main(int argc, char const *argv[])
     shader->setUniformVec3("light.ambient", glm::vec3(0.2f, 0.2f, 0.2f));
     shader->setUniformVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // darken diffuse light a bit
     shader->setUniformVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
+    shader->setUniform1f("light.constant", 1.f);
+    shader->setUniform1f("light.linear", .09f);
+    shader->setUniform1f("light.quadratic", .032f);
     lightShader->use();
     lightShader->setUniformMat4("projection", projection);
 
