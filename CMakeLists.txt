@@ -31,6 +31,8 @@ add_subdirectory(Chapter-Materials/)
 add_subdirectory(Chapter-LightningMaps/)
 # LightningCasters
 add_subdirectory(Chapter-LightningCasters/)
+# MultipleLights
+add_subdirectory(Chapter-MultipleLights/)
 
 
 SET(LINK_FLAGS ${LINK_FLAGS} glfw3 dl GL X11 pthread glad Utils)
@@ -52,3 +54,4 @@ target_link_libraries(LightningMaps ${LINK_FLAGS})
 target_link_libraries(directional ${LINK_FLAGS})
 target_link_libraries(point ${LINK_FLAGS})
 target_link_libraries(spotlight ${LINK_FLAGS})
+target_link_libraries(MultipleLights ${LINK_FLAGS})
