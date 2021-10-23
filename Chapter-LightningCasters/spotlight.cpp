@@ -216,15 +216,14 @@ int main(int argc, char const *argv[])
         diff.deactivateUnit();
         spec.unbind();
         spec.deactivateUnit();
-        // Swap Buffer and handle events
-        glfwSwapBuffers(window);
-        glfwPollEvents();
+        // Update view
         view = c.update(window);
-        // Update views
-        shader->use();
         shader->setUniformVec3("light.direction", c.getDirection());
         shader->setUniformVec3("light.position", c.getPosition());
         shader->setUniformMat4("view", view);
+        // Swap Buffer and handle events
+        glfwSwapBuffers(window);
+        glfwPollEvents();
     }
     glDeleteVertexArrays(1, &simpleCubeVAO);
     glDeleteBuffers(1, &simpleCubeVBO);
