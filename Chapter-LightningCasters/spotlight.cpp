@@ -179,6 +179,7 @@ int main(int argc, char const *argv[])
     shader->setUniformVec3("light.diffuse", glm::vec3(0.5f, 0.5f, 0.5f)); // darken diffuse light a bit
     shader->setUniformVec3("light.specular", glm::vec3(1.0f, 1.0f, 1.0f));
     shader->setUniform1f("light.cutOff", glm::cos(glm::radians(12.5)));
+    shader->setUniform1f("light.outerCutOff", glm::cos(glm::radians(17.5)));
 
     glm::vec3 positions[15] = {
         {8, .1f, 9}, {-1, 6, 3}, {7, 5, 8}, {-6, 3, 7}, {5, 7, 1}, {-4, 6, -1}, {3, 5, 7}, {-3, 3, 4}, {9, 5, -6}, {-6, 7, 3}, {-6, -2, -7}, {-7, 5, 7}, {1, 2, 7}, {-3, -7, 4}, {6, -6, 8}};
